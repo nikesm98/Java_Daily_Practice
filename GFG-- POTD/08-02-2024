@@ -1,0 +1,38 @@
+class Solution {
+    boolean check(Node root) {
+        // Your code here
+        if (root == null) return true;
+
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        int level = 0;
+        int leaf = -1;
+
+        while (!q.isEmpty()) {
+            int n = q.size();
+            level++;
+
+            for (int i = 0; i < n; i++) {
+                Node curr = q.poll();
+
+                if (curr.left == null && curr.right == null) {
+                    // I have encountered a leaf node
+                    if (leaf == -1) {
+                        leaf = level;
+                    } else if (leaf != level) {
+                        return false;
+                    }
+                }
+
+                if (curr.left != null) {
+                    q.add(curr.left);
+                }
+                if (curr.right != null) {
+                    q.add(curr.right);
+                }
+            }
+        }
+        return true;
+    }
+}
+

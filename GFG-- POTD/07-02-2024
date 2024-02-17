@@ -1,0 +1,28 @@
+class GfG {
+    int findDist(Node root, int a, int b) {
+        // Your code here
+        Node LCA = lca(root, a, b);
+        int x = solve(LCA, a);
+        int y = solve(LCA, b);
+        return x + y - 2;
+    }
+
+    Node lca(Node root, int a, int b) {
+        if (root == null) return null;
+        if (root.data == a || root.data == b) return root;
+        Node leftLCA = lca(root.left, a, b);
+        Node rightLCA = lca(root.right, a, b);
+        if (leftLCA != null && rightLCA != null) return root;
+        if (leftLCA != null) return leftLCA;
+        return rightLCA;
+    }
+
+    int solve(Node root, int val) {
+        if (root == null) return 0;
+        if (root.data == val) return 1;
+        int a = solve(root.left, val);
+        int b = solve(root.right, val);
+        if (a == 0 && b == 0) return 0;
+        else return a + b + 1;
+    }
+}

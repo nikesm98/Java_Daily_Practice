@@ -1,0 +1,40 @@
+class GFG {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            String s = sc.next();
+            Solution ob = new Solution();
+            System.out.println(ob.atoi(s));
+        }
+    }
+}
+
+class Solution {
+    public int atoi(String s) {
+        int first = s.charAt(0);
+        boolean neg = false;
+        int x = 0;
+        if (first == 45) {
+            neg = true;
+            x = 1;
+        }
+
+        int output = 0;
+
+        for (int i = x; i < s.length(); i++) {
+            int check = s.charAt(i);
+
+            if (s.charAt(i) >= 58 || s.charAt(i) <= 47) {
+                return -1;
+            } else {
+                output = output * 10 + s.charAt(i) - 48;
+            }
+        }
+        if (neg) {
+            output = output * -1;
+        }
+
+        return output;
+    }
+}

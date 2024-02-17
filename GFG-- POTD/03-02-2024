@@ -1,0 +1,15 @@
+class Solution {
+    long DecimalValue(Node head) {
+        long out = 0;
+        long mod = 1000000007;
+        Node temp = head;
+
+        while (temp != null) {
+            out = (out << 1) % mod;
+            out = (out + temp.data) % mod;
+            temp = temp.next;
+        }
+
+        return out;
+    }
+}

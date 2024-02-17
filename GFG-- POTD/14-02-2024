@@ -1,0 +1,30 @@
+class Solution {
+
+    private List<List<Integer>> ans = new ArrayList<>();
+    private int timer = 0;
+
+    private void dfs(int node, List<Integer>[] adj, int[] lowtime, int[] parent, int timer) {
+        lowtime[node] = timer;
+        int parentTime = timer++;
+
+        for (int x : adj[node]) {
+            if (x == parent[node]) {
+                continue;
+            }
+
+            if (lowtime[x] == 0) { // Unvisited node
+                parent[x] = node;
+                dfs(x, adj, lowtime, parent, timer);
+                lowtime[node] = Math.min(lowtime[node], lowtime[x]);
+
+                if (lowtime[x] > lowtime[node]) { // Back edge condition
+                    ans.add(List.of(node, x));
+                }
+            } else if (lowtime[x] > lowtime[node]) { // Non-parent descendant
+                lowtime[node] = Math.min(lowtime[node], lowtime[x]);
+            }
+        }
+    }
+
+
+}

@@ -1,0 +1,24 @@
+class Solution {
+    static ArrayList<Integer> recamanSequence(int n) {
+        ArrayList<Integer> ans = new ArrayList<>(n);
+        HashSet<Integer> s = new HashSet<>();
+
+        for (int i = 0; i < n; i++) {
+            if (i == 0) {
+                ans.add(0);
+                s.add(0);
+            } else {
+                int val = ans.get(i - 1) - i;
+                if (val > 0 && !s.contains(val)) {
+                    s.add(val);
+                    ans.add(val);
+                } else {
+                    s.add(ans.get(i - 1) + i);
+                    ans.add(ans.get(i - 1) + i);
+                }
+            }
+        }
+
+        return ans;
+    }
+}

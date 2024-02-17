@@ -1,0 +1,34 @@
+class Solution {
+
+    // Function to return count of nodes at a given distance from leaf nodes.
+    int printKDistantfromLeaf(Node root, int k) {
+        // Write your code here
+        int[] ans = {0};
+        traverse(root, k, ans);
+        return ans[0];
+    }
+
+    void traverse(Node node, int k, int[] ans) {
+        if (node == null) return;
+
+        check(node, k, 0, ans);
+        traverse(node.left, k, ans);
+        traverse(node.right, k, ans);
+    }
+
+    void check(Node node, int k, int d, int[] ans) {
+        if (node.left == null && node.right == null) {
+            if (d == k) {
+                ans[0]++;
+            }
+            return;
+        }
+
+        if (node.left != null) {
+            check(node.left, k, d + 1, ans);
+        }
+        if (node.right != null) {
+            check(node.right, k, d + 1, ans);
+        }
+    }
+}
