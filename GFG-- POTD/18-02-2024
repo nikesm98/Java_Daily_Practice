@@ -1,0 +1,21 @@
+class Solution {
+    private int sum = 0;
+
+    private void traversal(Node root) {
+        if (root == null) return;
+        if (root.left == null && root.right == null) {
+            sum += root.data;
+            return;
+        }
+
+        traversal(root.right);
+        traversal(root.left);
+    }
+
+    /* You are required to complete below method */
+    public static int sumOfLeafNodes(Node root) {
+        Solution solution = new Solution();
+        solution.traversal(root);
+        return solution.sum;
+    }
+}

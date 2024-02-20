@@ -1,0 +1,32 @@
+class Solution {
+    public static boolean solve(String A, HashMap<String, Integer> mp, int ind) {
+        if (ind >= A.length()) {
+            return true;
+        }
+
+        for (int i = ind; i < A.length(); i++) {
+            String s = A.substring(ind, i + 1);
+            if (mp.containsKey(s)) {
+                if (solve(A, mp, i + 1)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean func(String A, ArrayList<String> B) {
+        // code here
+        HashMap<String, Integer> mp = new HashMap<>();
+        for (int i = 0; i < B.size(); i++) {
+            mp.put(B.get(i), mp.getOrDefault(B.get(i), 0) + 1);
+        }
+
+        return solve(A, mp, 0);
+    }
+
+    public static int wordBreak(int n, String s, ArrayList<String> dictionary) {
+        // code here
+        return func(s, dictionary) ? 1 : 0;
+    }
+}
