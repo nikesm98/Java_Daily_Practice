@@ -1,0 +1,28 @@
+class Solution {
+    public List<String> AllPossibleStrings(String s) {
+        List<String> ans = new ArrayList<>();
+        String curr = "";
+        int ind = 0;
+        solve(s, ind, curr, ans);
+
+        Collections.sort(ans);
+        return ans;
+    }
+
+    private void solve(String s, int ind, String curr, List<String> ans) {
+        if (ind == s.length()) {
+            if (curr.length() > 0) {
+                ans.add(curr);
+            }
+            return;
+        }
+
+        // take
+        curr += s.charAt(ind);
+        solve(s, ind + 1, curr, ans);
+
+        // not take
+        curr = curr.substring(0, curr.length() - 1);
+        solve(s, ind + 1, curr, ans);
+    }
+}
