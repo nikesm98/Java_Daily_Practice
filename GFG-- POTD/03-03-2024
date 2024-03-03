@@ -1,0 +1,13 @@
+
+class Solution {
+    String printLargest(int n, String[] arr) {
+        Arrays.sort(arr, (a, b) -> (b + a).compareTo(a + b));
+
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            ans.append(arr[i]);
+        }
+
+        return ans.toString();
+    }
+}
